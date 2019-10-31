@@ -27,11 +27,10 @@ var numeral = function(array) {
   return result;
 }
 
-var prepAndRun = function(str) {
-  str = parseInt(str);
-  if (str >= 4000) return "TOO BIG!!!";
-  str = str.toString();
-  var array = str.split('');
+var prepAndRun = function(numInput) {
+  numInput = parseInt(numInput);
+  if (numInput >= 4000) return "TOO BIG!!!";
+  var array = numInput.toString().split('');
   var numArray = array.map(n => parseInt(n));
   while (numArray.length < 4) {
     numArray.unshift(0);
@@ -39,23 +38,38 @@ var prepAndRun = function(str) {
   return numeral(numArray);
 }
 
-var tests = [
-  [0,5,9,3], // XXIII
-  [1,9,0,1], // MI
-];
 
-var newTests = [
-  "593",
-  "1901",
-  "0000035",
-  "5500"
-];
+// UI
+
+$(document).ready(function(){
+  $("#number-input").submit(function(event){
+    event.preventDefault();
+    var numInput = $('#user-number').val();
+    $('#converted-results').text(prepAndRun(numInput));
+  });
+});
 
 
-var tester = function(tests) {
-  newTests.forEach(function(test) {
-    console.log(prepAndRun(test));
-  })
-}
 
-tester(tests);
+// TESTS
+
+// var tests = [
+//   [0,5,9,3], // XXIII
+//   [1,9,0,1], // MI
+// ];
+//
+// var newTests = [
+//   "593",
+//   "1901",
+//   "0000035",
+//   "5500"
+// ];
+//
+//
+// var tester = function(tests) {
+//   newTests.forEach(function(test) {
+//     console.log(prepAndRun(test));
+//   })
+// }
+//
+// tester(tests);
